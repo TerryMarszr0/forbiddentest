@@ -1,0 +1,31 @@
+#获取每秒包转发数
+tail -1 /proc/net/ip_vs_stats | /usr/bin/awk '{print strtonum("0x"$1),strtonum("0x"$2), strtonum("0x"$3), strtonum("0x"$4),strtonum("0x"$5)}'|awk '{print $2}'
+
+#获取每秒转发的流量
+tail -1/proc/net/ip_vs_stats | /usr/bin/awk '{print strtonum("0x"$1),strtonum("0x"$2), strtonum("0x"$3),strtonum("0x"$4), strtonum("0x"$5)}'|awk '{print $4}'
+
+#获取lvs会话连接数
+wc -l /proc/net/ip_vs_conn|awk '{print $1}'
+
+#获取每台的连接数   10.9.128.29
+ipvsadm -L -n|grep 10.9.128.8|sed -n '$p'|awk '{print $5+0}'
+ipvsadm -L -n|grep 10.9.128.9|sed -n '$p'|awk '{print $5+0}'
+ipvsadm -L -n|grep 10.9.128.10|sed -n '$p'|awk '{print $5+0}'
+ipvsadm -L -n|grep 10.9.128.120|sed -n '$p'|awk '{print $5+0}'
+ipvsadm -L -n|grep 10.9.128.121|sed -n '$p'|awk '{print $5+0}'
+
+
+#获取每台的连接数ip  10.9.128.11
+ipvsadm -L -n|grep 10.9.128.8|sed -n '$p'|awk '{print $5+0}'
+ipvsadm -L -n|grep 10.9.128.9|sed -n '$p'|awk '{print $5+0}'
+ipvsadm -L -n|grep 10.9.128.10|sed -n '$p'|awk '{print $5+0}'
+ipvsadm -L -n|grep 10.9.128.120|sed -n '$p'|awk '{print $5+0}'
+ipvsadm -L -n|grep 10.9.128.121|sed -n '$p'|awk '{print $5+0}'
+
+
+
+
+每秒包转发数
+每秒转发的流量
+lvs会话连接数
+每台的连接数
